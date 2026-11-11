@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en" data-i18n-title="home.meta.title">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Yiding Cui (@winoros)</title>
-<meta name="description" content="Yiding Cui (@winoros) — Database Kernel Engineer working on Query Optimizer & Distributed SQL at PingCAP (TiDB).">
+<meta name="description" data-i18n-content="home.meta.description" content="Yiding Cui (@winoros) — Database Kernel Engineer working on Query Optimizer &amp; Distributed SQL at PingCAP (TiDB).">
 <style>
   :root {
     color-scheme: light dark;
@@ -70,6 +70,12 @@
     border-bottom: 1px solid var(--border);
     margin-bottom: 36px;
   }
+  .hdr-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
   h1 {
     font-size: 28px;
     font-weight: 700;
@@ -98,6 +104,30 @@
     text-decoration: none;
   }
   a:hover { text-decoration: underline; }
+  .lang-switch {
+    display: inline-flex;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .lang-btn {
+    background: transparent;
+    color: var(--muted);
+    border: none;
+    padding: 6px 9px;
+    font-size: 12.5px;
+    line-height: 1.2;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .lang-btn + .lang-btn { border-left: 1px solid var(--border); }
+  .lang-btn:hover { background: var(--surface-hover); color: var(--text); }
+  .lang-btn.active {
+    background: var(--text);
+    color: var(--bg);
+    font-weight: 600;
+  }
   .theme-btn {
     background: var(--surface);
     color: var(--text);
@@ -105,8 +135,10 @@
     border-radius: 4px;
     padding: 6px 11px;
     font-size: 12.5px;
+    line-height: 1.2;
     cursor: pointer;
     flex-shrink: 0;
+    font-family: inherit;
   }
   .theme-btn:hover { background: var(--surface-hover); }
   h2 {
@@ -207,6 +239,8 @@
   }
   @media (max-width: 600px) {
     .container { padding: 32px 16px 48px; }
+    header { flex-direction: column-reverse; align-items: stretch; gap: 14px; }
+    .hdr-actions { align-self: flex-end; }
     h1 { font-size: 23px; }
   }
 </style>
@@ -216,70 +250,66 @@
   <header>
     <div>
       <h1>Yiding Cui <span class="handle">@winoros</span></h1>
-      <p class="bio">Database Kernel Engineer at <b>PingCAP</b> · Focusing on the <b>TiDB</b> Query Optimizer, Cost &amp; Cardinality Estimation, Access Path Selection, and Plan Management.</p>
+      <p class="bio" data-i18n-html="home.bioHtml">Database Kernel Engineer at <b>PingCAP</b> · Focusing on the <b>TiDB</b> Query Optimizer, Cost &amp; Cardinality Estimation, Access Path Selection, and Plan Management.</p>
       <div class="links">
-        <a href="https://github.com/winoros" target="_blank" rel="noopener">GitHub Profile</a>
-        <a href="https://github.com/pingcap/tidb/commits?author=winoros" target="_blank" rel="noopener">TiDB Commits</a>
-        <a href="https://github.com/pingcap/tidb/pulls?q=is%3Apr+author%3Awinoros" target="_blank" rel="noopener">Pull Requests</a>
+        <a href="https://github.com/winoros" target="_blank" rel="noopener" data-i18n="home.links.github">GitHub Profile</a>
+        <a href="https://github.com/pingcap/tidb/commits?author=winoros" target="_blank" rel="noopener" data-i18n="home.links.commits">TiDB Commits</a>
+        <a href="https://github.com/pingcap/tidb/pulls?q=is%3Apr+author%3Awinoros" target="_blank" rel="noopener" data-i18n="home.links.prs">Pull Requests</a>
       </div>
     </div>
-    <button class="theme-btn" id="themeBtn" type="button" aria-label="切换亮暗主题">切换主题</button>
+    <div class="hdr-actions">
+      <div class="lang-switch" role="group" data-i18n-aria-label="common.langSwitchAria" aria-label="Language">
+        <button type="button" class="lang-btn" data-lang-opt="zh-CN">中文</button>
+        <button type="button" class="lang-btn" data-lang-opt="en">EN</button>
+      </div>
+      <button class="theme-btn" id="themeBtn" type="button" data-i18n="common.toggleTheme" data-i18n-aria-label="common.toggleThemeAria">切换主题</button>
+    </div>
   </header>
 
   <section>
-    <h2>Reports &amp; Deep Dives · 分析报告</h2>
+    <h2 data-i18n="home.sections.reports">分析报告与深度专题</h2>
     <div class="card-list">
-      <a class="card" href="./reports/tidb-optimizer-issues/">
+      <a class="card" href="./reports/tidb-optimizer-issues/" data-keep-lang>
         <div class="card-top">
-          <span class="card-title">TiDB 优化器开放 Issue 全景筛除、严重度与修复难度分级报告</span>
+          <span class="card-title" data-i18n="home.reports.tidbOptimizer.title">TiDB 优化器开放 Issue 全景筛除、严重度与修复难度分级报告</span>
           <span class="card-date">2026-11-11</span>
         </div>
-        <p class="card-desc">对 pingcap/tidb 优化器相关开放单据进行去噪审阅：剥离 SQLancer / 差分 Fuzz 与 AI 静态猎奇边界，区分 Enhancement 与真实有效 Bug，构建 Difficulty × Severity 二维优先级矩阵，并关联在途修复 PR 与增量更新水位线。</p>
+        <p class="card-desc" data-i18n="home.reports.tidbOptimizer.desc">对 pingcap/tidb 优化器相关开放单据进行去噪审阅：剥离 SQLancer / 差分 Fuzz 与 AI 静态猎奇边界，区分 Enhancement 与真实有效 Bug，构建 Difficulty × Severity 二维优先级矩阵，并关联在途修复 PR 与增量更新水位线。</p>
         <div class="tags">
-          <span class="tag">TiDB Planner</span>
-          <span class="tag">Issue Triage</span>
-          <span class="tag">Interactive Explorer</span>
+          <span class="tag" data-i18n="home.reports.tidbOptimizer.tags.planner">TiDB 优化器</span>
+          <span class="tag" data-i18n="home.reports.tidbOptimizer.tags.triage">Issue 研判</span>
+          <span class="tag" data-i18n="home.reports.tidbOptimizer.tags.explorer">交互式看板</span>
         </div>
       </a>
     </div>
   </section>
 
   <section>
-    <h2>Focus Areas · 关注领域</h2>
+    <h2 data-i18n="home.sections.focus">关注领域</h2>
     <div class="focus-grid">
       <div class="focus-item">
-        <b>Logical &amp; Physical Optimization</b>
-        <span>Cascades / Volcano search, subquery decorrelation, predicate simplification &amp; functional dependencies.</span>
+        <b data-i18n="home.focus.logical.title">Logical &amp; Physical Optimization</b>
+        <span data-i18n="home.focus.logical.desc">Cascades / Volcano search, subquery decorrelation, predicate simplification &amp; functional dependencies.</span>
       </div>
       <div class="focus-item">
-        <b>Access Paths &amp; Range Extraction</b>
-        <span>Ranger detachment, composite / prefix / partial / multi-valued indexes, and IndexMerge paths.</span>
+        <b data-i18n="home.focus.access.title">Access Paths &amp; Range Extraction</b>
+        <span data-i18n="home.focus.access.desc">Ranger detachment, composite / prefix / partial / multi-valued indexes, and IndexMerge paths.</span>
       </div>
       <div class="focus-item">
-        <b>Statistics, CBO &amp; Plan Cache</b>
-        <span>Histograms, TopN, out-of-range estimation, cost calibration, and prepared/instance plan caching.</span>
+        <b data-i18n="home.focus.stats.title">Statistics, CBO &amp; Plan Cache</b>
+        <span data-i18n="home.focus.stats.desc">Histograms, TopN, out-of-range estimation, cost calibration, and prepared/instance plan caching.</span>
       </div>
     </div>
   </section>
 
   <footer>
     <span>© Yiding Cui (@winoros)</span>
-    <span>Hosted on GitHub Pages</span>
+    <span data-i18n="common.hostedOn">Hosted on GitHub Pages</span>
   </footer>
 </div>
-<script>
-(function() {
-  const root = document.documentElement;
-  const saved = localStorage.getItem("winoros-theme");
-  if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved);
-  document.getElementById("themeBtn").addEventListener("click", function() {
-    const cur = root.getAttribute("data-theme");
-    const sysDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const next = cur ? (cur === "dark" ? "light" : "dark") : (sysDark ? "light" : "dark");
-    root.setAttribute("data-theme", next);
-    localStorage.setItem("winoros-theme", next);
-  });
-})();
-</script>
+<script src="./i18n/i18n.js"></script>
+<script src="./i18n/zh-CN.js"></script>
+<script src="./i18n/en.js"></script>
+<script>SiteI18n.init();</script>
 </body>
 </html>
