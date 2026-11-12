@@ -5,38 +5,81 @@
       "zh-CN",
       "en"
     ],
-    "snapshot_utc": "2026-11-11T11:20:30Z",
-    "snapshot_utc8": "2026-11-11 19:20 (UTC+8)",
-    "max_issue_updated_utc": "2026-11-11T06:49:48Z",
-    "max_issue_updated_utc8": "2026-11-11 14:49 (UTC+8)",
-    "incremental_gh_search_qualifier": "updated:>=2026-11-11T06:49:48Z",
-    "total_candidates": 563,
-    "canonical_candidates": 455,
-    "real_bugs": 275,
+    "snapshot_utc": "2026-11-12T08:00:38Z",
+    "snapshot_utc8": "2026-11-12 16:00 (UTC+8)",
+    "max_issue_updated_utc": "2026-11-12T03:17:25Z",
+    "max_issue_updated_utc8": "2026-11-12 11:17 (UTC+8)",
+    "incremental_gh_search_qualifier": "updated:>=2026-11-12T03:17:25Z",
+    "total_candidates": 564,
+    "canonical_candidates": 456,
+    "real_bugs": 278,
     "delta_since_prev_snapshot": {
-      "prev_snapshot_date": "2026-11-11T01:17+08:00",
+      "prev_snapshot_date": "2026-11-11T11:20:30Z",
       "closed_issues_removed": [
         {
-          "number": 70812,
-          "prev_cat": "MEDIUM",
-          "reason": "Fixed by PR #71302 (merged 2026-11-10T22:04:35Z)"
+          "number": 72335,
+          "prev_cat": "FILTER_RANDOM_FUZZ",
+          "prev_severity": "N/A",
+          "closed_at": "2026-11-12T07:27:28Z",
+          "reason": "Closed by maintainer (requires manual expr_pushdown_blacklist)"
         },
         {
-          "number": 15623,
-          "prev_cat": "FILTER_NON_OPT_OR_FIXED",
-          "reason": "Closed 2026-11-10T18:27:43Z"
+          "number": 70845,
+          "prev_cat": "EASY",
+          "prev_severity": "CRITICAL",
+          "closed_at": "2026-11-11T11:44:22Z",
+          "reason": "Duplicate of #65991"
+        },
+        {
+          "number": 58182,
+          "prev_cat": "EASY",
+          "prev_severity": "CRITICAL",
+          "closed_at": "2026-11-11T18:19:15Z",
+          "reason": "No longer reproducible on master (verified by TestEmptyHists & ANALYZE tests)"
+        }
+      ],
+      "relabeled_graduated_removed": [
+        {
+          "number": 72585,
+          "prev_cat": "ENHANCEMENT",
+          "reason": "Relabeled from type/bug to type/enhancement on GitHub (2026-11-12T07:25:25Z)"
         }
       ],
       "new_open_candidates_added": [
         {
-          "number": 72985,
-          "cat": "FILTER_NON_OPT_OR_FIXED",
-          "reason": "Dashboard MView UI tracking"
+          "number": 73040,
+          "cat": "MEDIUM",
+          "severity": "MAJOR",
+          "subsystem": "access_path_partition_lock",
+          "reason": "Ranger chooseBetweenRangeAndPoint drops residual RemainedConds when swapping ranges, returning extra rows"
         },
         {
-          "number": 39453,
-          "cat": "FILTER_NON_OPT_OR_FIXED",
-          "reason": "Reopened flaky test in pkg/bindinfo"
+          "number": 73033,
+          "cat": "MEDIUM",
+          "severity": "MAJOR",
+          "subsystem": "logical_rewrite",
+          "reason": "Code-audit found (realistic): SEMI_JOIN_REWRITE groups by inner column collation instead of join collation, losing or duplicating rows"
+        },
+        {
+          "number": 73031,
+          "cat": "EASY",
+          "severity": "MAJOR",
+          "subsystem": "cbo_cost_join_reorder",
+          "reason": "Code-audit found (default plan): IndexHashJoin skips collation check for ENUM/SET outer keys against _ci inner index, matching wrong rows"
+        },
+        {
+          "number": 73030,
+          "cat": "MEDIUM",
+          "severity": "MAJOR",
+          "subsystem": "access_path_partition_lock",
+          "reason": "Code-audit found (default plan): Indexed utf8mb4_0900_ai_ci LIKE prefix range drops residual LIKE filter, mis-matching ligatures (e.g. Straße vs Strasse)"
+        },
+        {
+          "number": 73029,
+          "cat": "MEDIUM",
+          "severity": "MAJOR",
+          "subsystem": "access_path_partition_lock",
+          "reason": "Code-audit found (default plan): Indexed YEAR column converts 2-digit IN constants to 20xx ranges while evaluator compares raw ints, returning wrong rows"
         }
       ]
     }
@@ -69,6 +112,206 @@
     ]
   },
   "records": [
+    {
+      "number": 73040,
+      "title": "planner: wrong result with fix control 54337 when an index column sits between the `IN` column and the column used in an `OR` branch",
+      "author": "sanketkedia",
+      "assignees": [],
+      "created": "2026-11-11",
+      "created_at": "2026-11-11T22:40:46Z",
+      "updated_at": "2026-11-12T03:17:25Z",
+      "updated_display": "2026-11-12 11:17",
+      "labels": [
+        "type/bug",
+        "contribution",
+        "sig/planner",
+        "severity/major",
+        "may-affects-7.5",
+        "may-affects-8.1",
+        "may-affects-8.5",
+        "may-affects-26.3",
+        "may-affects-25.10",
+        "may-affects-26.9"
+      ],
+      "is_canonical": true,
+      "is_customer": false,
+      "is_borderline_kept": false,
+      "cat": "MEDIUM",
+      "diff_rank": 2,
+      "severity": "MAJOR",
+      "sev_rank": 3,
+      "gh_severity": "major",
+      "subsystem": "access_path_partition_lock",
+      "note": {
+        "zh-CN": "Ranger chooseBetweenRangeAndPoint 替换区间时漏补回残余过滤条件导致错结果",
+        "en": "Ranger chooseBetweenRangeAndPoint drops residual RemainedConds when swapping ranges, returning extra rows"
+      },
+      "prs": [],
+      "has_pr": false,
+      "has_open_pr": false,
+      "has_any_open_pr": false,
+      "has_merged_pr": false
+    },
+    {
+      "number": 73033,
+      "title": "Semi-join rewrite (`SEMI_JOIN_REWRITE()`) groups the inner key by the inner column's collation but joins with the collation of the original `=`, so EXISTS loses outer rows or returns them several times",
+      "author": "hanke580",
+      "assignees": [],
+      "created": "2026-11-11",
+      "created_at": "2026-11-11T17:18:00Z",
+      "updated_at": "2026-11-11T20:19:53Z",
+      "updated_display": "2026-11-12 04:19",
+      "labels": [
+        "type/bug",
+        "contribution",
+        "sig/planner",
+        "severity/major",
+        "may-affects-7.5",
+        "may-affects-8.1",
+        "may-affects-8.5",
+        "may-affects-26.3",
+        "may-affects-25.10",
+        "may-affects-26.9"
+      ],
+      "is_canonical": true,
+      "is_customer": false,
+      "is_borderline_kept": true,
+      "cat": "MEDIUM",
+      "diff_rank": 2,
+      "severity": "MAJOR",
+      "sev_rank": 3,
+      "gh_severity": "major",
+      "subsystem": "logical_rewrite",
+      "note": {
+        "zh-CN": "源码审计发现但场景常规：SEMI_JOIN_REWRITE 按内表列排序规则分组未对齐连接排序规则导致漏行或重行",
+        "en": "Code-audit found (realistic): SEMI_JOIN_REWRITE groups by inner column collation instead of join collation, losing or duplicating rows"
+      },
+      "prs": [],
+      "has_pr": false,
+      "has_open_pr": false,
+      "has_any_open_pr": false,
+      "has_merged_pr": false
+    },
+    {
+      "number": 73031,
+      "title": "Index join with an ENUM/SET outer key and a `_ci` VARCHAR/CHAR inner index skips the collation check: the default IndexHashJoin matches `'new'` with `'NEW'` although `enum_col = varchar_col` compares in `utf8mb4_bin`",
+      "author": "hanke580",
+      "assignees": [],
+      "created": "2026-11-11",
+      "created_at": "2026-11-11T17:16:39Z",
+      "updated_at": "2026-11-11T20:20:13Z",
+      "updated_display": "2026-11-12 04:20",
+      "labels": [
+        "type/bug",
+        "contribution",
+        "sig/planner",
+        "severity/major",
+        "may-affects-7.5",
+        "may-affects-8.1",
+        "may-affects-8.5",
+        "may-affects-26.3",
+        "may-affects-25.10",
+        "may-affects-26.9"
+      ],
+      "is_canonical": true,
+      "is_customer": false,
+      "is_borderline_kept": true,
+      "cat": "EASY",
+      "diff_rank": 1,
+      "severity": "MAJOR",
+      "sev_rank": 3,
+      "gh_severity": "major",
+      "subsystem": "cbo_cost_join_reorder",
+      "note": {
+        "zh-CN": "源码审计发现但默认触发：ENUM/SET 外键与 _ci 字符串内表走默认 IndexHashJoin 时跳过排序规则检查导致错配",
+        "en": "Code-audit found (default plan): IndexHashJoin skips collation check for ENUM/SET outer keys against _ci inner index, matching wrong rows"
+      },
+      "prs": [],
+      "has_pr": false,
+      "has_open_pr": false,
+      "has_any_open_pr": false,
+      "has_merged_pr": false
+    },
+    {
+      "number": 73030,
+      "title": "`LIKE 'abc'` / `LIKE 'abc%'` on an indexed `utf8mb4_0900_ai_ci` column is answered from collation-key ranges without re-checking the LIKE, so `'Straße' LIKE 'Strasse'` matches: wrong rows in SELECT, DELETE and INSERT … SELECT",
+      "author": "hanke580",
+      "assignees": [],
+      "created": "2026-11-11",
+      "created_at": "2026-11-11T17:14:58Z",
+      "updated_at": "2026-11-11T20:50:03Z",
+      "updated_display": "2026-11-12 04:50",
+      "labels": [
+        "type/bug",
+        "contribution",
+        "sig/planner",
+        "severity/major",
+        "may-affects-7.5",
+        "may-affects-8.1",
+        "may-affects-8.5",
+        "may-affects-26.3",
+        "may-affects-25.10",
+        "may-affects-26.9"
+      ],
+      "is_canonical": true,
+      "is_customer": false,
+      "is_borderline_kept": true,
+      "cat": "MEDIUM",
+      "diff_rank": 2,
+      "severity": "MAJOR",
+      "sev_rank": 3,
+      "gh_severity": "major",
+      "subsystem": "access_path_partition_lock",
+      "note": {
+        "zh-CN": "源码审计发现但默认触发：utf8mb4_0900_ai_ci 索引列执行 LIKE 前缀匹配未保留残余过滤导致合字误匹配",
+        "en": "Code-audit found (default plan): Indexed utf8mb4_0900_ai_ci LIKE prefix range drops residual LIKE filter, mis-matching ligatures (e.g. Straße vs Strasse)"
+      },
+      "prs": [],
+      "has_pr": false,
+      "has_open_pr": false,
+      "has_any_open_pr": false,
+      "has_merged_pr": false
+    },
+    {
+      "number": 73029,
+      "title": "Indexed YEAR column: the index range for `y IN (24, 25)` is built for 2024/2025 while the IN evaluator compares the plain integers, so SELECT, DELETE and INSERT … SELECT act on rows the predicate does not match",
+      "author": "hanke580",
+      "assignees": [],
+      "created": "2026-11-11",
+      "created_at": "2026-11-11T17:14:08Z",
+      "updated_at": "2026-11-11T20:50:12Z",
+      "updated_display": "2026-11-12 04:50",
+      "labels": [
+        "type/bug",
+        "contribution",
+        "sig/planner",
+        "severity/critical",
+        "may-affects-7.5",
+        "may-affects-8.1",
+        "may-affects-8.5",
+        "may-affects-26.3",
+        "may-affects-25.10",
+        "may-affects-26.9"
+      ],
+      "is_canonical": true,
+      "is_customer": false,
+      "is_borderline_kept": true,
+      "cat": "MEDIUM",
+      "diff_rank": 2,
+      "severity": "MAJOR",
+      "sev_rank": 3,
+      "gh_severity": "critical",
+      "subsystem": "access_path_partition_lock",
+      "note": {
+        "zh-CN": "源码审计发现但默认触发：YEAR 索引列 IN 列表按两位年份转为 20xx 建区间但求值器按原整数比较导致结果不一致",
+        "en": "Code-audit found (default plan): Indexed YEAR column converts 2-digit IN constants to 20xx ranges while evaluator compares raw ints, returning wrong rows"
+      },
+      "prs": [],
+      "has_pr": false,
+      "has_open_pr": false,
+      "has_any_open_pr": false,
+      "has_merged_pr": false
+    },
     {
       "number": 72985,
       "title": "Track Dashboard fixes for the TiDB 8.5 materialized view release",
@@ -448,10 +691,31 @@
       "gh_severity": "moderate",
       "subsystem": "statistics",
       "note": null,
-      "prs": [],
-      "has_pr": false,
+      "prs": [
+        {
+          "num": 73026,
+          "repo": "pingcap/tidb",
+          "label": "#73026",
+          "url": "https://github.com/pingcap/tidb/pull/73026",
+          "state": "OPEN",
+          "title": "planner: estimate missing-stats indexes with exponential backoff and drop prefer-range gate (#72078)",
+          "is_cherry_pick": true,
+          "updated_at": "2026-11-11T15:21:50Z"
+        },
+        {
+          "num": 73025,
+          "repo": "pingcap/tidb",
+          "label": "#73025",
+          "url": "https://github.com/pingcap/tidb/pull/73025",
+          "state": "OPEN",
+          "title": "planner: estimate missing-stats indexes with exponential backoff and drop prefer-range gate (#72078)",
+          "is_cherry_pick": true,
+          "updated_at": "2026-11-11T15:17:06Z"
+        }
+      ],
+      "has_pr": true,
       "has_open_pr": false,
-      "has_any_open_pr": false,
+      "has_any_open_pr": true,
       "has_merged_pr": false
     },
     {
@@ -481,10 +745,21 @@
       "gh_severity": "moderate",
       "subsystem": "statistics",
       "note": null,
-      "prs": [],
-      "has_pr": false,
+      "prs": [
+        {
+          "num": 73026,
+          "repo": "pingcap/tidb",
+          "label": "#73026",
+          "url": "https://github.com/pingcap/tidb/pull/73026",
+          "state": "OPEN",
+          "title": "planner: estimate missing-stats indexes with exponential backoff and drop prefer-range gate (#72078)",
+          "is_cherry_pick": true,
+          "updated_at": "2026-11-11T15:21:50Z"
+        }
+      ],
+      "has_pr": true,
       "has_open_pr": false,
-      "has_any_open_pr": false,
+      "has_any_open_pr": true,
       "has_merged_pr": false
     },
     {
@@ -807,16 +1082,6 @@
       "note": null,
       "prs": [
         {
-          "num": 72953,
-          "repo": "pingcap/tidb",
-          "label": "#72953",
-          "url": "https://github.com/pingcap/tidb/pull/72953",
-          "state": "OPEN",
-          "title": "expression: use a dense bitset or a map for GetUsedList's UniqueID set",
-          "is_cherry_pick": false,
-          "updated_at": "2026-11-11T11:14:49Z"
-        },
-        {
           "num": 72832,
           "repo": "pingcap/tidb",
           "label": "#72832",
@@ -864,7 +1129,7 @@
           "state": "MERGED",
           "title": "expression: use a UniqueID set in GetUsedList for wide schemas",
           "is_cherry_pick": false,
-          "updated_at": "2026-11-10T16:25:15Z"
+          "updated_at": "2026-11-11T15:25:39Z"
         },
         {
           "num": 72998,
@@ -884,7 +1149,17 @@
           "state": "OPEN",
           "title": "expression: use a UniqueID set in GetUsedList for wide schemas (#72824)",
           "is_cherry_pick": true,
-          "updated_at": "2026-11-10T16:25:44Z"
+          "updated_at": "2026-11-11T15:26:02Z"
+        },
+        {
+          "num": 72953,
+          "repo": "pingcap/tidb",
+          "label": "#72953",
+          "url": "https://github.com/pingcap/tidb/pull/72953",
+          "state": "CLOSED",
+          "title": "expression: use a dense bitset or a map for GetUsedList's UniqueID set",
+          "is_cherry_pick": false,
+          "updated_at": "2026-11-11T15:25:33Z"
         }
       ],
       "has_pr": true,
@@ -936,7 +1211,7 @@
           "state": "OPEN",
           "title": "statistics: replace separate TopN merge with combined TopN+histogram merge for global stats (#68147)",
           "is_cherry_pick": true,
-          "updated_at": "2026-11-09T21:35:20Z"
+          "updated_at": "2026-11-11T15:10:05Z"
         }
       ],
       "has_pr": true,
@@ -988,7 +1263,7 @@
           "state": "OPEN",
           "title": "statistics: replace separate TopN merge with combined TopN+histogram merge for global stats (#68147)",
           "is_cherry_pick": true,
-          "updated_at": "2026-11-09T21:35:20Z"
+          "updated_at": "2026-11-11T15:10:05Z"
         }
       ],
       "has_pr": true,
@@ -1040,7 +1315,7 @@
           "state": "OPEN",
           "title": "statistics: replace separate TopN merge with combined TopN+histogram merge for global stats (#68147)",
           "is_cherry_pick": true,
-          "updated_at": "2026-11-09T21:35:20Z"
+          "updated_at": "2026-11-11T15:10:05Z"
         }
       ],
       "has_pr": true,
@@ -1128,7 +1403,7 @@
           "state": "OPEN",
           "title": "planner: preserve literal handles in instance plan cache",
           "is_cherry_pick": false,
-          "updated_at": "2026-11-06T17:09:38Z"
+          "updated_at": "2026-11-11T11:54:01Z"
         }
       ],
       "has_pr": true,
@@ -1263,7 +1538,7 @@
           "state": "OPEN",
           "title": "statistics, domain: keep stats workers running after a panic",
           "is_cherry_pick": false,
-          "updated_at": "2026-11-10T01:37:53Z"
+          "updated_at": "2026-11-11T22:04:47Z"
         }
       ],
       "has_pr": true,
@@ -1306,7 +1581,7 @@
           "state": "OPEN",
           "title": "planner: unify OR type IndexMerge code paths (#58396)",
           "is_cherry_pick": true,
-          "updated_at": "2026-11-11T02:16:20Z"
+          "updated_at": "2026-11-11T15:45:25Z"
         }
       ],
       "has_pr": true,
@@ -1617,7 +1892,7 @@
           "state": "OPEN",
           "title": "planner: safely fall back for invalid TIMESTAMP range bounds",
           "is_cherry_pick": false,
-          "updated_at": "2026-11-05T12:46:36Z"
+          "updated_at": "2026-11-12T00:23:11Z"
         },
         {
           "num": 72599,
@@ -1664,37 +1939,6 @@
       "sev_rank": 3,
       "gh_severity": "major",
       "subsystem": "access_path_partition_lock",
-      "note": null,
-      "prs": [],
-      "has_pr": false,
-      "has_open_pr": false,
-      "has_any_open_pr": false,
-      "has_merged_pr": false
-    },
-    {
-      "number": 72585,
-      "title": "Redundant ORDER BY after unique PK disables ordered LIMIT scan",
-      "author": "jinhui-lai",
-      "assignees": [],
-      "created": "2026-11-02",
-      "created_at": "2026-11-02T07:57:31Z",
-      "updated_at": "2026-11-02T11:19:45Z",
-      "updated_display": "2026-11-02 19:19",
-      "labels": [
-        "type/bug",
-        "contribution",
-        "sig/planner",
-        "severity/moderate"
-      ],
-      "is_canonical": true,
-      "is_customer": false,
-      "is_borderline_kept": false,
-      "cat": "ENHANCEMENT",
-      "diff_rank": 0,
-      "severity": "N/A",
-      "sev_rank": 0,
-      "gh_severity": "moderate",
-      "subsystem": "logical_rewrite",
       "note": null,
       "prs": [],
       "has_pr": false,
@@ -1778,16 +2022,6 @@
       "note": null,
       "prs": [
         {
-          "num": 72979,
-          "repo": "pingcap/tidb",
-          "label": "#72979",
-          "url": "https://github.com/pingcap/tidb/pull/72979",
-          "state": "OPEN",
-          "title": "meta: fix schema and table filter precedence for DDL jobs (#72918) | tidb-test=release-8.5-20261015-v8.5.8",
-          "is_cherry_pick": false,
-          "updated_at": "2026-11-11T07:22:59Z"
-        },
-        {
           "num": 72918,
           "repo": "pingcap/tidb",
           "label": "#72918",
@@ -1796,11 +2030,21 @@
           "title": "meta: fix schema and table filter precedence for DDL jobs",
           "is_cherry_pick": false,
           "updated_at": "2026-11-11T02:56:48Z"
+        },
+        {
+          "num": 72979,
+          "repo": "pingcap/tidb",
+          "label": "#72979",
+          "url": "https://github.com/pingcap/tidb/pull/72979",
+          "state": "MERGED",
+          "title": "meta: fix schema and table filter precedence for DDL jobs (#72918) | tidb-test=release-8.5-20261015-v8.5.8",
+          "is_cherry_pick": true,
+          "updated_at": "2026-11-12T04:21:12Z"
         }
       ],
       "has_pr": true,
-      "has_open_pr": true,
-      "has_any_open_pr": true,
+      "has_open_pr": false,
+      "has_any_open_pr": false,
       "has_merged_pr": true
     },
     {
@@ -1875,10 +2119,21 @@
       "gh_severity": "major",
       "subsystem": "logical_rewrite",
       "note": null,
-      "prs": [],
-      "has_pr": false,
-      "has_open_pr": false,
-      "has_any_open_pr": false,
+      "prs": [
+        {
+          "num": 73044,
+          "repo": "pingcap/tidb",
+          "label": "#73044",
+          "url": "https://github.com/pingcap/tidb/pull/73044",
+          "state": "OPEN",
+          "title": "planner: keep outer column collation for COLLATE on correlated column",
+          "is_cherry_pick": false,
+          "updated_at": "2026-11-12T04:40:17Z"
+        }
+      ],
+      "has_pr": true,
+      "has_open_pr": true,
+      "has_any_open_pr": true,
       "has_merged_pr": false
     },
     {
@@ -1968,52 +2223,6 @@
           "title": "planner: dedup every casted key in multi-column IN subquery to join rewrite",
           "is_cherry_pick": false,
           "updated_at": "2026-11-07T02:55:15Z"
-        }
-      ],
-      "has_pr": true,
-      "has_open_pr": true,
-      "has_any_open_pr": true,
-      "has_merged_pr": false
-    },
-    {
-      "number": 72335,
-      "title": "UNION over unsigned columns: TiDB row-based CAST(int AS int) zeroes unsigned values >= 2^63, while TiKV keeps them",
-      "author": "r33s3n6",
-      "assignees": [],
-      "created": "2026-10-25",
-      "created_at": "2026-10-25T16:06:44Z",
-      "updated_at": "2026-10-30T14:53:16Z",
-      "updated_display": "2026-10-30 22:53",
-      "labels": [
-        "type/bug",
-        "contribution",
-        "sig/planner",
-        "severity/moderate",
-        "affects-8.5",
-        "affects-26.3",
-        "affects-25.10",
-        "affects-26.9"
-      ],
-      "is_canonical": true,
-      "is_customer": false,
-      "is_borderline_kept": false,
-      "cat": "FILTER_RANDOM_FUZZ",
-      "diff_rank": 0,
-      "severity": "N/A",
-      "sev_rank": 0,
-      "gh_severity": "moderate",
-      "subsystem": "logical_rewrite",
-      "note": null,
-      "prs": [
-        {
-          "num": 72547,
-          "repo": "pingcap/tidb",
-          "label": "#72547",
-          "url": "https://github.com/pingcap/tidb/pull/72547",
-          "state": "OPEN",
-          "title": "expression: keep unsigned values >= 2^63 when casting unsigned int to unsigned int in UNION",
-          "is_cherry_pick": false,
-          "updated_at": "2026-10-30T17:39:26Z"
         }
       ],
       "has_pr": true,
@@ -2352,7 +2561,7 @@
           "state": "OPEN",
           "title": "planner: fix ANALYZE panic when a skipped column is needed by a generated column or an index",
           "is_cherry_pick": false,
-          "updated_at": "2026-11-09T16:52:42Z"
+          "updated_at": "2026-11-11T12:22:49Z"
         }
       ],
       "has_pr": true,
@@ -3975,56 +4184,6 @@
       "has_merged_pr": false
     },
     {
-      "number": 70845,
-      "title": "Null-safe equality (<=>) on a RANGE-partitioned table panics and kills the connection",
-      "author": "showonlady",
-      "assignees": [],
-      "created": "2026-09-03",
-      "created_at": "2026-09-03T02:19:39Z",
-      "updated_at": "2026-09-17T15:33:01Z",
-      "updated_display": "2026-09-17 23:33",
-      "labels": [
-        "type/bug",
-        "contribution",
-        "sig/planner",
-        "severity/major",
-        "affects-7.5",
-        "affects-8.1",
-        "affects-8.5",
-        "affects-26.3",
-        "affects-25.10"
-      ],
-      "is_canonical": true,
-      "is_customer": false,
-      "is_borderline_kept": true,
-      "cat": "EASY",
-      "diff_rank": 1,
-      "severity": "CRITICAL",
-      "sev_rank": 4,
-      "gh_severity": "major",
-      "subsystem": "access_path_partition_lock",
-      "note": {
-        "zh-CN": "外部贡献简化：RANGE 分区表 1 <=> a 常量在左触发裁剪 panic",
-        "en": "Reduced external report: Constant-on-left 1 <=> a triggers partition pruning panic on RANGE table"
-      },
-      "prs": [
-        {
-          "num": 71147,
-          "repo": "pingcap/tidb",
-          "label": "#71147",
-          "url": "https://github.com/pingcap/tidb/pull/71147",
-          "state": "OPEN",
-          "title": "planner: handle reversed null-safe equality in range pruning [release-8.5]",
-          "is_cherry_pick": false,
-          "updated_at": "2026-09-16T05:23:26Z"
-        }
-      ],
-      "has_pr": true,
-      "has_open_pr": true,
-      "has_any_open_pr": true,
-      "has_merged_pr": false
-    },
-    {
       "number": 70796,
       "title": "planner: allow `tidb_request_source_type` and `tidb_low_resolution_tso` in `SET_VAR` hints",
       "author": "cgtz",
@@ -4452,16 +4611,6 @@
           "updated_at": "2026-09-07T03:34:58Z"
         },
         {
-          "num": 70914,
-          "repo": "pingcap/tidb",
-          "label": "#70914",
-          "url": "https://github.com/pingcap/tidb/pull/70914",
-          "state": "OPEN",
-          "title": "executor: fix race between MPP task dispatch and cancellation (#70690)",
-          "is_cherry_pick": true,
-          "updated_at": "2026-11-11T08:59:21Z"
-        },
-        {
           "num": 70915,
           "repo": "pingcap/tidb",
           "label": "#70915",
@@ -4470,11 +4619,21 @@
           "title": "executor: fix race between MPP task dispatch and cancellation (#70690)",
           "is_cherry_pick": true,
           "updated_at": "2026-09-07T10:59:40Z"
+        },
+        {
+          "num": 70914,
+          "repo": "pingcap/tidb",
+          "label": "#70914",
+          "url": "https://github.com/pingcap/tidb/pull/70914",
+          "state": "MERGED",
+          "title": "executor: fix race between MPP task dispatch and cancellation (#70690)",
+          "is_cherry_pick": true,
+          "updated_at": "2026-11-11T20:38:36Z"
         }
       ],
       "has_pr": true,
       "has_open_pr": false,
-      "has_any_open_pr": true,
+      "has_any_open_pr": false,
       "has_merged_pr": true
     },
     {
@@ -7388,7 +7547,7 @@
           "state": "OPEN",
           "title": "planner: fix partial index wrongly kept due to shared Range pointer mutation",
           "is_cherry_pick": false,
-          "updated_at": "2026-08-18T00:57:28Z"
+          "updated_at": "2026-11-11T19:06:43Z"
         }
       ],
       "has_pr": true,
@@ -8187,6 +8346,16 @@
       "note": null,
       "prs": [
         {
+          "num": 73043,
+          "repo": "pingcap/tidb",
+          "label": "#73043",
+          "url": "https://github.com/pingcap/tidb/pull/73043",
+          "state": "OPEN",
+          "title": "ddl, executor: support materialized view output logs",
+          "is_cherry_pick": false,
+          "updated_at": "2026-11-12T08:00:34Z"
+        },
+        {
           "num": 72864,
           "repo": "pingcap/tidb",
           "label": "#72864",
@@ -8198,8 +8367,8 @@
         }
       ],
       "has_pr": true,
-      "has_open_pr": false,
-      "has_any_open_pr": false,
+      "has_open_pr": true,
+      "has_any_open_pr": true,
       "has_merged_pr": true
     },
     {
@@ -8227,10 +8396,21 @@
       "gh_severity": "moderate",
       "subsystem": "logical_rewrite",
       "note": null,
-      "prs": [],
-      "has_pr": false,
-      "has_open_pr": false,
-      "has_any_open_pr": false,
+      "prs": [
+        {
+          "num": 73043,
+          "repo": "pingcap/tidb",
+          "label": "#73043",
+          "url": "https://github.com/pingcap/tidb/pull/73043",
+          "state": "OPEN",
+          "title": "ddl, executor: support materialized view output logs",
+          "is_cherry_pick": false,
+          "updated_at": "2026-11-12T08:00:34Z"
+        }
+      ],
+      "has_pr": true,
+      "has_open_pr": true,
+      "has_any_open_pr": true,
       "has_merged_pr": false
     },
     {
@@ -9962,16 +10142,6 @@
           "updated_at": "2026-10-27T12:27:23Z"
         },
         {
-          "num": 68741,
-          "repo": "pingcap/tidb",
-          "label": "#68741",
-          "url": "https://github.com/pingcap/tidb/pull/68741",
-          "state": "MERGED",
-          "title": "planner: try top-2 seeds in advanced greedy join reorder (#68340) | tidb-test=pr/2754",
-          "is_cherry_pick": false,
-          "updated_at": "2026-06-12T01:48:09Z"
-        },
-        {
           "num": 68340,
           "repo": "pingcap/tidb",
           "label": "#68340",
@@ -9990,6 +10160,16 @@
           "title": "Add full outer join MPP fullstack test",
           "is_cherry_pick": false,
           "updated_at": "2026-08-26T09:53:20Z"
+        },
+        {
+          "num": 68741,
+          "repo": "pingcap/tidb",
+          "label": "#68741",
+          "url": "https://github.com/pingcap/tidb/pull/68741",
+          "state": "MERGED",
+          "title": "planner: try top-2 seeds in advanced greedy join reorder (#68340) | tidb-test=pr/2754",
+          "is_cherry_pick": true,
+          "updated_at": "2026-06-12T01:48:09Z"
         },
         {
           "num": 67784,
@@ -10378,25 +10558,29 @@
       ],
       "created": "2026-03-31",
       "created_at": "2026-03-31T07:49:23Z",
-      "updated_at": "2026-05-24T21:33:25Z",
-      "updated_display": "2026-05-25 05:33",
+      "updated_at": "2026-11-11T18:39:45Z",
+      "updated_display": "2026-11-12 02:39",
       "labels": [
         "type/bug",
         "contribution",
         "sig/planner",
-        "severity/major",
-        "affects-8.5"
+        "severity/moderate",
+        "affects-8.5",
+        "fuzz/contribution"
       ],
       "is_canonical": true,
       "is_customer": false,
-      "is_borderline_kept": false,
+      "is_borderline_kept": true,
       "cat": "MEDIUM",
       "diff_rank": 2,
       "severity": "CRITICAL",
       "sev_rank": 4,
-      "gh_severity": "major",
+      "gh_severity": "moderate",
       "subsystem": "logical_rewrite",
-      "note": null,
+      "note": {
+        "zh-CN": "Fuzz 约简但空表常规可达：关联 HAVING expr IN (SELECT ... GROUP BY 1) 触发越界 panic",
+        "en": "Fuzz-reduced (reproduces on empty table): Correlated HAVING expr IN (SELECT ... GROUP BY 1) triggers index-out-of-range panic"
+      },
       "prs": [
         {
           "num": 68622,
@@ -11675,8 +11859,8 @@
       "assignees": [],
       "created": "2026-01-26",
       "created_at": "2026-01-26T07:35:02Z",
-      "updated_at": "2026-11-06T00:17:45Z",
-      "updated_display": "2026-11-06 08:17",
+      "updated_at": "2026-11-12T00:18:26Z",
+      "updated_display": "2026-11-12 08:18",
       "labels": [
         "type/bug",
         "type/enhancement",
@@ -11879,7 +12063,8 @@
           "url": "https://github.com/pingcap/tidb/pull/67129",
           "state": "MERGED",
           "title": "planner: replace outer-join null-reject evaluation with structural proof | tidb-test=pr/2724",
-          "is_cherry_pick": false
+          "is_cherry_pick": false,
+          "updated_at": ""
         }
       ],
       "has_pr": true,
@@ -16321,37 +16506,6 @@
       "has_merged_pr": false
     },
     {
-      "number": 58182,
-      "title": "An unanalyzed and empty partitioned table with no record inserted into mysql.stats_histograms's analyze might got panicked",
-      "author": "winoros",
-      "assignees": [],
-      "created": "2024-12-11",
-      "created_at": "2024-12-11T19:23:00Z",
-      "updated_at": "2024-12-18T10:06:42Z",
-      "updated_display": "2024-12-18 18:06",
-      "labels": [
-        "type/bug",
-        "sig/planner",
-        "component/statistics",
-        "severity/moderate"
-      ],
-      "is_canonical": true,
-      "is_customer": false,
-      "is_borderline_kept": false,
-      "cat": "EASY",
-      "diff_rank": 1,
-      "severity": "CRITICAL",
-      "sev_rank": 4,
-      "gh_severity": "moderate",
-      "subsystem": "statistics",
-      "note": null,
-      "prs": [],
-      "has_pr": false,
-      "has_open_pr": false,
-      "has_any_open_pr": false,
-      "has_merged_pr": false
-    },
-    {
       "number": 58129,
       "title": "The query result of the sql statement in tidb is inconsistent with mysql.",
       "author": "erwadba",
@@ -16752,7 +16906,7 @@
           "state": "OPEN",
           "title": "planner: preserve SELECT privilege checks for DELETE joins",
           "is_cherry_pick": false,
-          "updated_at": "2026-10-28T12:34:39Z"
+          "updated_at": "2026-11-11T18:22:18Z"
         }
       ],
       "has_pr": true,
@@ -17955,8 +18109,8 @@
       ],
       "created": "2024-03-21",
       "created_at": "2024-03-21T04:47:27Z",
-      "updated_at": "2026-11-10T00:16:15Z",
-      "updated_display": "2026-11-10 08:16",
+      "updated_at": "2026-11-12T00:18:13Z",
+      "updated_display": "2026-11-12 08:18",
       "labels": [
         "type/bug",
         "type/enhancement",
